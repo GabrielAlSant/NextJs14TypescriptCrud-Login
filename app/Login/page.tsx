@@ -4,9 +4,9 @@ import axios from 'axios';
 import { useUser } from '../../AuthContext/useContext';
 import { useRouter } from 'next/navigation';
 import Header from '@/components/header';
+import { setUserCookies } from '@/lib/cookies';
 
 const Login = () => {
- const { user } = useUser();
   const { login } = useUser();
   const [values, setValues] = useState({ email: '', password: '' });
   const [error, setError] = useState(false);
@@ -23,22 +23,20 @@ const Login = () => {
 
   const onSubmit = async () => {
     try {
-      setError(false)
-      const response = await axios.post("http://localhost:3000/user/login", values);
-
-      if (response.data) {
-        login(response.data);
-        console.log("Sucesso");
-        router.push('/Users')
-        
-      }else if(response.data == false){
-        setError(true);
-        setErrormsg("Este email não está cadastrado em nosso banco")
-      } 
-      else if( response.data == null) {
-        setError(true);
-        setErrormsg("Senha incorreta");
-      }
+      setError(false);
+      const response = await axios.post("http://localhost:3000/user/login", values); 
+        if (response.data.status === 401) {
+          setError(true);
+          setErrormsg("Senha incorreta");
+        } else if (response.data.status === 404) {
+          setError(true);
+          setErrormsg("Usuário não encontrado");
+        } else {
+          login(response.data.data);
+          setUserCookies('user', response.data.data.id)
+          console.log("Sucesso");
+          router.push('/Users');
+        }
     } catch (err) {
       console.error('Erro ao validar login', err);
     }
@@ -47,31 +45,32 @@ const Login = () => {
   return (
     <div>
       <Header />
-      <div>
-      {error && (<p style={{ color: 'red' }}>{errormsg}</p>)}
-        <h4 className='nameatt'>Email</h4>
+      <div className='loginfield'>
+        <h2>Login</h2>
         <input
           type='text'
           name='email'
+          placeholder="Email"
           id='email'
           onChange={handleInputChange}
           required
         />
-        <h4 className='nameatt'>Password</h4>
+      
         <input
           type='password' 
           name='password'
           id='password'
+          placeholder="Senha"
           onChange={handleInputChange}
           required
         />
+        {error && (<div style={{ color: 'red', marginBottom:"20px", marginLeft:"20px" ,textAlign:"start" }}>{errormsg}</div>)}
+        <div className='buttonscad'>
+        <button onClick={onSubmit} className='butlogin'>Entrar</button>
       </div>
-      <div className='buttonscad'>
-        <a href='/'>
-          <button className='but can'>Cancelar</button>
-        </a>
-        <button onClick={onSubmit} className='but cad'>Login</button>
       </div>
+      
+      
       </div>  
   );
 };

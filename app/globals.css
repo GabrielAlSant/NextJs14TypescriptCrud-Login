@@ -1,8 +1,262 @@
-ul{
-    display: flex;
-    list-style: none;
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0px;
 }
 
-li{
-    padding: 10px;
+header {
+    display: flex;
+    justify-content: center;
+    background-color: #0a1c2c;
+    color: white;
+
 }
+
+.profileImage {
+    margin-top: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.nameuser {
+    margin-left: -5px;
+}
+
+header h2 {
+
+    text-decoration: none;
+    padding: 30px;
+}
+
+header ul {
+    margin-right: 350px;
+    display: flex;
+    list-style: none;
+    margin-left: 300px;
+
+}
+
+header li {
+    padding-top: 35px;
+    padding-right: 70px;
+    font-weight: bolder;
+    justify-content: center;
+}
+
+header p {
+    font-weight: bolder;
+}
+
+.login {
+
+    padding: 35px;
+    font-weight: bolder;
+
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    transition: 300ms;
+}
+
+a:hover {
+    text-decoration: none;
+    color: gray;
+    transition: 300ms;
+}
+
+
+.addusertitle {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+
+.AddUser {
+    display: flex;
+    justify-content: center;
+}
+
+.field {
+    margin: 20px;
+    display: flex;
+    border-top: 2px solid black;
+    padding-top: 20px;
+}
+
+.AddUser .nameatt {
+    padding: 10px;
+    min-width: 50px !important;
+}
+
+.AddUser button {
+    padding: 15px;
+    background-color: #172c3f;
+    border: 2px solid #172c3f;
+    margin: 10px;
+    transition: 300ms;
+    border-radius: 30px;
+    color: white;
+    font-weight: bolder;
+}
+
+.AddUser button:hover {
+    padding: 15px;
+    color: #172c3f;
+    background-color: white;
+    border: 2px solid #172c3f;
+    transition: 300ms;
+}
+
+.AddUser input {
+    width: 200px;
+    border-radius: 20px;
+    padding: 5px;
+}
+
+
+.AddUser input[type=file]::file-selector-button {
+    background-color: #172c3f;
+    color: white;
+    border: 0px;
+    border-radius: 30px;
+    border-right: 1px solid #e5e5e5;
+    padding: 10px 15px;
+    margin-right: 20px;
+    transition: .5s;
+    width: 200px;
+}
+
+
+.buttonscad {
+    display: flex;
+    justify-content: center;
+}
+
+
+
+.loginfield {
+    display: block;
+    margin: 100px auto auto auto;
+    padding: 15px;
+    border: 2px solid #172c3f;
+    width: 350px;
+}
+
+.loginfield h2 {
+    text-align: center;
+    margin: 20px
+}
+
+.loginfield input {
+    display: block;
+    margin: 30px auto 30px auto;
+    width: 300px;
+    padding: 10px
+}
+
+.butlogin {
+    display: block;
+    margin: 00px auto 30px auto;
+    width: 320px;
+    padding: 10px;
+    background-color: #172c3f;
+    color: white;
+    border: 2px solid #172c3f;
+    font-weight: bolder;
+    transition: 300ms
+}
+
+
+.butlogin:hover {
+    display: block;
+    margin: 00px auto 30px auto;
+    width: 320px;
+    padding: 10px;
+    background-color: white;
+    color: #172c3f;
+    border: 2px solid #172c3f;
+    font-weight: bolder;
+    transition: 300ms
+}
+
+.allusers {
+    margin: 40px auto 40px auto;
+    width: 800px;
+    padding: 30px;
+
+}
+
+.allusers h2 {
+
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid black;
+
+}
+
+
+
+.allusers table {
+    margin: auto;
+
+}
+
+.allusers input{
+    margin: 20px 0px 20px 0px;
+    display: block;
+    width: 780px;
+    padding: 10px;
+    border-radius: 5px;
+   font-weight: bolder;
+}
+
+.imguser {
+    border-radius: 50%;
+    margin-top: 5px;
+}
+
+
+.allusers table th{
+    text-align: start;
+     width:300px;
+     color:#172c3f;
+}
+
+.divtable{
+    border-bottom: 2px solid black !important;
+}
+
+.name{
+    display: flex;
+    margin-bottom:-0.5px
+   
+}
+
+.nameusertable{
+  padding: 20px;
+}
+
+table{
+    border-collapse: collapse;
+    padding: 15px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  font-weight: bolder;
+}
+
+.bordertable{
+    border: 1px solid black;
+    padding: 15px;
+    border-radius: 5px;
+}
+

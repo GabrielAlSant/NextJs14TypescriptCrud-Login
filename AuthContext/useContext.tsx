@@ -1,4 +1,5 @@
 "use client"
+import { deleteUserCookies } from '@/lib/cookies';
 import { createContext, useContext, ReactNode, useState } from 'react';
 
 interface User {
@@ -24,6 +25,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   const logout = () => {
+    deleteUserCookies()
     setUser(null);
   };
 

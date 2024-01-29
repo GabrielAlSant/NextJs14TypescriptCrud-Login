@@ -6,9 +6,9 @@ import { getUserCookies } from '@/lib/cookies';
 import { useUser } from '@/AuthContext/useContext';
 
 
-const AddUser = () => {
-  const [values, setValues] = useState<{ name?: string; email?: string; password?: string; img?: File }>({});
-  const [error, setError] = useState(false)
+const AddPost = () => {
+  const [values, setValues] = useState<{ title?: string; content?: string; authorId?: string; img?: File }>({});
+
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.type === 'file') {
@@ -27,22 +27,20 @@ const AddUser = () => {
 
   const onSubmit = async () => {
     try {
-      setError(false)
+    
       const formData = new FormData();
-      formData.append('name', values.name || '');
-      formData.append('email', values.email || '');
-      formData.append('password', values.password || '');
+      formData.append('title', values.title || '');
+      formData.append('content', values.content || '');
+      formData.append('authorId', values.authorId || '');
       formData.append('img', values.img || '');
 
-      const response = await axios.post("http://localhost:3000/user", formData, {
+      const response = await axios.post("http://localhost:3000/post", formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
 
-      if(response.data == 422){
-        setError(true)
-      };
+      console.log(response.data);
     } catch (error) {
       console.error('Error creating user', error);
     }
@@ -61,8 +59,8 @@ const AddUser = () => {
         </div>
         <input
           type='text'
-          name="name"
-          id='name'
+          name="title"
+          id='title'
           onChange={handleInputChange}
           required
         />
@@ -71,25 +69,22 @@ const AddUser = () => {
         <div className='nameatt'>
           Email:
         </div>
-       <div style={{marginTop:5}}>
-       <input
+        <input
           type='text'
-          name="email"
-          id='email'
+          name="content"
+          id='content'
           onChange={handleInputChange}
           required
         />
-        {error && (<div style={{ color: 'red', marginTop:"20px" ,textAlign:"start" }}>Este email já está sendo utilizado</div>)}
-       </div>
         </div>
         <div className='field'>
         <div className='nameatt'>
           Senha:
         </div>
         <input
-          type='password'
-          name="password"
-          id='password'
+          type=''
+          name="authorId"
+          id='authorId'
           onChange={handleInputChange}
           required
         />
@@ -120,4 +115,4 @@ const AddUser = () => {
   );
 };
 
-export default AddUser;
+export default AddPost;
