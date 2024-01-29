@@ -30,6 +30,7 @@ export default function Home() {
     VerifyUser(user, route);
     return null; 
   }
+  
   return (
     <div>
       <Header />

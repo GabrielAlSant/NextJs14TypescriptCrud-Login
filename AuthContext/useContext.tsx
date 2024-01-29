@@ -3,6 +3,7 @@ import { deleteUserCookies } from '@/lib/cookies';
 import { createContext, useContext, ReactNode, useState } from 'react';
 
 interface User {
+  id?:number;
   name?: string;
   email?: string;
   password?: string;

@@ -33,7 +33,7 @@ const Login = () => {
           setErrormsg("Usuário não encontrado");
         } else {
           login(response.data.data);
-          setUserCookies('user', response.data.data.id)
+          setUserCookies('user', response.data.token)
           console.log("Sucesso");
           router.push('/Users');
         }
