@@ -12,7 +12,6 @@ export async function getUserCookies(){
     const useCookies = cookies()
     const token = useCookies.get('user')   
     if (!token) {
-        console.error("Cookie não encontrado.");
         return null;
       } 
       const response = await axios.post("http://localhost:3000/getuser", {token:token.value}, {
@@ -20,6 +19,7 @@ export async function getUserCookies(){
           'authorization': `Bearer ${token.value}`
         }
       });
+      
     if (response.data == 401) {
     deleteUserCookies()
     console.error("Token Invalido ou expirado.")

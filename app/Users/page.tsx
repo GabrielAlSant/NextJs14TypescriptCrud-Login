@@ -28,9 +28,9 @@ if (error) alert("Erro ao buscar dados");
 
   if (!user) {
     VerifyUser(user, route);
-    return null; 
+    return  <div>Redirecionando...</div>;
   }
-  
+
   return (
     <div>
       <Header />
