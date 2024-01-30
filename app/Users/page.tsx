@@ -24,7 +24,7 @@ export default function Home() {
     )
     : [];
 
-  if (error) return <div>Error ao buscar dados</div>;
+if (error) alert("Erro ao buscar dados");
 
   if (!user) {
     VerifyUser(user, route);
