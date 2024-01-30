@@ -16,7 +16,7 @@ export async function getUserCookies(){
         return null;
       } 
       console.log(token.value)
-      const response = await axios.post("http://localhost:3000/getuser", null, {
+      const response = await axios.post("http://localhost:3000/getuser", {token:token.value}, {
         headers: {
           'authorization': `Bearer ${token.value}`
         }
