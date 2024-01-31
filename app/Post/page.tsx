@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Key, useState } from "react";
 import useSWR from "swr";
 import Header from "@/components/header";
+import { format } from 'date-fns';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -25,36 +26,46 @@ export default function Home() {
     <div>
       <Header />
       <div className="allusers">
-        <h2>Usuarios</h2>
+        <h2>Post</h2>
         <input
           placeholder="Procurar"
           onChange={(e) => setFilter(e.target.value)}
         />
-        <table>
-          <tr>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Senha</th>
-          </tr>
+          <div>
+          </div> {updatedFilteredData.length === 0 ? (
+              <p>Nenhum post encontrado.</p>
+            ) : (
+              <>
           {updatedFilteredData.map(
-            ({ id, title, content, authorId, img }: { id: Key; title: string; content: string; authorId: string; img: string }) => (
-              <tr key={id}>
-                <td className="name">
-                  <Image
+            ({ id, title, content, author, img, postDate}: { id: Key; title: string; content: string; author: any; img: string; postDate:string}) => (
+              <div key={id}>
+                <div>
+                <div className="name">
+                        <Image
+                          src={author.img}
+                          width={50}
+                          height={50}
+                          alt={author.name}
+                          className="imguser"
+                        />
+                        <span className="nameusertable">{author.name}</span>
+                  </div>
+                  <div>{format(new Date(postDate), 'dd/MM/yyyy HH:mm')}</div>
+                  <h3 className="">{title}</h3>
+                </div>
+                <div className="email">{content}</div>
+                <Image
                     src={img}
-                    width={50}
-                    height={50}
+                    width={250}
+                    height={250}
                     alt={title}
-                    className="imguser"
                   />
-                  <span className="nameusertable">{title}</span>
-                </td>
-                <td className="email">{content}</td>
-                <td className="password">{authorId}</td>
-              </tr>
+              </div>
             )
           )}
-        </table>
+          </>
+          )}
+      
       </div>
     </div>
   );

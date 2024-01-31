@@ -25,7 +25,9 @@ export default function Header(){
             <ul>
                 
                 <Link href='/Users'><li>Usuarios</li></Link>
-                <Link href='AddUser'><li>Cadastrar</li></Link>               
+                <Link href='AddUser'><li>Cadastrar</li></Link>  
+                <Link href='Post'><li>Posts</li></Link>         
+                <Link href='AddPost'><li>Add Posts</li></Link>         
             </ul>
             {user ? (
         <div>

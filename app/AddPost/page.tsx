@@ -55,7 +55,7 @@ const AddPost = () => {
       <h2 className='addusertitle'>Criar Conta</h2>
       <div className='field'>
       <div className='nameatt'>
-          Nome: 
+          Titulo: 
         </div>
         <input
           type='text'
@@ -67,7 +67,7 @@ const AddPost = () => {
       </div>
         <div className='field'>
         <div className='nameatt'>
-          Email:
+          Conteudo:
         </div>
         <input
           type='text'
@@ -79,7 +79,7 @@ const AddPost = () => {
         </div>
         <div className='field'>
         <div className='nameatt'>
-          Senha:
+          Autor:
         </div>
         <input
           type=''
@@ -91,7 +91,7 @@ const AddPost = () => {
         </div> 
        <div className='field'>
        <div className='nameatt'>
-          Foto de Perfil: 
+         Imagem: 
         </div>
         <input
           type='file'
