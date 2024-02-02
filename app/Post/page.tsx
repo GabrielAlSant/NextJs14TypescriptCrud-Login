@@ -4,13 +4,13 @@ import Image from "next/image";
 import { Key, useState } from "react";
 import useSWR from "swr";
 import Header from "@/components/header";
-import { format } from 'date-fns';
+import moment from 'moment'
+import 'moment/locale/pt'
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-export default function Home() {
+export default function Post() {
   const [filter, setFilter] = useState("");
-
   const { data, error } = useSWR("http://localhost:3000/post", fetcher);
 
   const updatedFilteredData = data
@@ -49,19 +49,21 @@ export default function Home() {
                           alt={author.name}
                           className="imguser"
                         />
-                        <span className="nameusertable">{author.name}<br/><span className="data">{format(new Date(postDate), 'dd/MM/yyyy HH:mm')}</span></span>
+                        <span className="nameusertable">{author.name}<br/><span className="data">{moment(postDate).locale('pt').fromNow()}</span></span>
                         
                   </div>
                   
                   <h3 className="">{title}</h3>
                 </div>
                 <div className="email" style={{marginTop:'20px', marginBottom:'20px'}}>{content}</div>
-                <Image
-                    src={img}
-                    width={680}
-                    height={600}
-                    alt={title}
-                  />
+               {img && 
+              (<Image
+                 src={img}
+                 width={680}
+                 height={600}
+                 alt={title}
+               />)
+               }
               </div>
             )
           )}

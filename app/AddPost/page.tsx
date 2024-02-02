@@ -7,6 +7,7 @@ import { useUser } from '@/AuthContext/useContext';
 
 
 const AddPost = () => {
+  const {user} = useUser()
   const [values, setValues] = useState<{ title?: string; content?: string; authorId?: string; img?: File }>({});
 
 
@@ -45,6 +46,17 @@ const AddPost = () => {
       console.error('Error creating user', error);
     }
   };
+
+  if (!user) {
+    return (
+     <div>
+      <Header />
+       <div className='loader'>
+      <div className="c-loader"></div>
+      </div>
+      </div>
+      );
+  }
   
 
   return (
@@ -77,14 +89,15 @@ const AddPost = () => {
           required
         />
         </div>
-        <div className='field'>
+        <div className='field'  style={{display:'none'}}>
         <div className='nameatt'>
           Autor:
         </div>
         <input
-          type=''
+          type='text'
           name="authorId"
           id='authorId'
+          value={user.id}
           onChange={handleInputChange}
           required
         />
@@ -107,7 +120,7 @@ const AddPost = () => {
         <a href='/'>
           <button className='but can'>Cancelar</button>
         </a>
-        <button onClick={onSubmit} className="but cad">Cadastrar</button>
+        <button onClick={onSubmit} className="but cad">Postar</button>
       </div>
      </div>
      </div> 

@@ -27,3 +27,27 @@
     width: 200px;
 
 }
+
+.buttonatt{
+ display:flex;
+ justify-content:center;
+ margin-top:20px;
+}
+
+.buttonatt button{
+    padding: 10px;
+    border: 1px solid white;
+    background-color: #172c3f;
+    color:white;
+    margin:10px;
+    transition:300ms
+}
+
+.buttonatt button:hover{
+    padding: 10px;
+    border: 1px solid #172c3f;
+    background-color: white;
+    color: #172c3f;
+    margin:10px;
+    transition:300ms
+}

@@ -52,7 +52,7 @@ export default function UserPage() {
         setError(true)
       }else{
       login(response.data)
-      route.push('/UserPerfil')
+
       }
       
     } catch (error) {
@@ -61,7 +61,14 @@ export default function UserPage() {
   };
 
   if (!user) {
-    return <div>Carregando...</div>;
+    return (
+     <div>
+      <Header />
+       <div className='loader'>
+      <div className="c-loader"></div>
+      </div>
+      </div>
+      );
   }
   return (
    <PrivateRoute>
@@ -83,7 +90,7 @@ export default function UserPage() {
           required
         />
       </div>
-        <div>
+        <div  style={{display:'none'}}>
         <div className="field">
           Email:
         </div>
@@ -141,9 +148,9 @@ export default function UserPage() {
       
       <div className='buttonatt'>
         <a href='/'>
-          <button>Cancelar</button>
+          <button>Voltar</button>
         </a>
-        <button onClick={onSubmit}>Cadastrar</button>
+        <button onClick={onSubmit}>Atualizar</button>
       </div>
      </div>
    </PrivateRoute>
