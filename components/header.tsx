@@ -32,7 +32,7 @@ export default function Header(){
             {user ? (
         <div>
         <Image src={user.img as string} width={50} height={50} className="profileImage" alt={user.name as string}></Image>
-        <p className="nameuser">{user.name}</p>  
+        <Link href="UserPerfil"> <p className="nameuser">{user.name}</p></Link>
         {''}
         <Image src={img} width={30} height={30} onClick={logout} alt={""} /> 
         </div>

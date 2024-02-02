@@ -1,6 +1,6 @@
 "use client"
-import { deleteUserCookies } from '@/lib/cookies';
-import { createContext, useContext, ReactNode, useState } from 'react';
+import { deleteUserCookies, getUserCookies } from '@/lib/cookies';
+import { createContext, useContext, ReactNode, useState, useEffect } from 'react';
 
 interface User {
   id?:number;
@@ -12,6 +12,7 @@ interface User {
 
 interface UserContextProps {
   user: User | null;
+  loading: boolean;  
   login: (userData: User) => void;
   logout: () => void;
 }
@@ -20,18 +21,30 @@ const UserContext = createContext<UserContextProps | undefined>(undefined);
 
 export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
-  
+  const [loading, setLoading] = useState(true);  
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const userdatacookie = await getUserCookies();
+      if (userdatacookie) {
+        login(userdatacookie);
+      }
+      setLoading(false);  
+    };
+    fetchData();
+  }, []); 
+
   const login = (userData: User) => {
     setUser(userData);
   };
 
   const logout = () => {
-    deleteUserCookies()
+    deleteUserCookies();
     setUser(null);
   };
 
   return (
-    <UserContext.Provider value={{ user, login, logout }}>
+    <UserContext.Provider value={{ user, loading, login, logout }}>
       {children}
     </UserContext.Provider>
   );

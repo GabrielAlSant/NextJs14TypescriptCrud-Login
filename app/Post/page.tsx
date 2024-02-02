@@ -38,26 +38,28 @@ export default function Home() {
               <>
           {updatedFilteredData.map(
             ({ id, title, content, author, img, postDate}: { id: Key; title: string; content: string; author: any; img: string; postDate:string}) => (
-              <div key={id}>
+              <div className="postcard" key={id}>
                 <div>
                 <div className="name">
                         <Image
+                        style={{marginTop:'12px'}}
                           src={author.img}
                           width={50}
                           height={50}
                           alt={author.name}
                           className="imguser"
                         />
-                        <span className="nameusertable">{author.name}</span>
+                        <span className="nameusertable">{author.name}<br/><span className="data">{format(new Date(postDate), 'dd/MM/yyyy HH:mm')}</span></span>
+                        
                   </div>
-                  <div>{format(new Date(postDate), 'dd/MM/yyyy HH:mm')}</div>
+                  
                   <h3 className="">{title}</h3>
                 </div>
-                <div className="email">{content}</div>
+                <div className="email" style={{marginTop:'20px', marginBottom:'20px'}}>{content}</div>
                 <Image
                     src={img}
-                    width={250}
-                    height={250}
+                    width={680}
+                    height={600}
                     alt={title}
                   />
               </div>

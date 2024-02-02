@@ -4,9 +4,9 @@ import Image from "next/image";
 import { Key, useEffect, useState } from "react";
 import useSWR from "swr";
 import Header from "@/components/header";
-import { VerifyUser } from "@/lib/verifyUser";
 import { useUser } from "@/AuthContext/useContext";
 import { useRouter } from 'next/navigation';
+import PrivateRoute from "@/components/privateRoute";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -26,13 +26,10 @@ export default function Home() {
 
 if (error) alert("Erro ao buscar dados");
 
-  if (!user) {
-    VerifyUser(user, route);
-    return  <div>Redirecionando...</div>;
-  }
 
   return (
-    <div>
+   <PrivateRoute>
+     <div>
       <Header />
       <div className="allusers">
         <h2>Usuários</h2>
@@ -75,5 +72,6 @@ if (error) alert("Erro ao buscar dados");
         </div>
       </div>
     </div>
+   </PrivateRoute>
   );
 }

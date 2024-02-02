@@ -260,3 +260,20 @@ th, td {
     border-radius: 5px;
 }
 
+.postcard{
+        margin:20px;
+    text-align: start;
+    padding:40px;
+    border: 2px solid rgb(233, 232, 232);
+    border-radius: 10px;
+}
+
+.postcard .nameusertable{
+    font-weight:bolder
+}
+
+.data{
+    color:gray;
+    font-weight:50px;
+    font-size:15px
+}
