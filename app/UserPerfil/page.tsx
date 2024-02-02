@@ -1,4 +1,5 @@
 "use client"
+import './userperfil.css'
 import Image from "next/image";
 import Header from "@/components/header";
 import { useUser } from "@/AuthContext/useContext";
@@ -49,9 +50,11 @@ export default function UserPage() {
 
       if(response.data == 401){
         setError(true)
-      }
+      }else{
       login(response.data)
-      route.push('/Post')
+      route.push('/UserPerfil')
+      }
+      
     } catch (error) {
       console.error('Error creating user', error);
     }
@@ -62,14 +65,16 @@ export default function UserPage() {
   }
   return (
    <PrivateRoute>
-     <div>
       <Header />
-    
-      <div className='field'>
-      <div className='nameatt'>
+     <div className='all'>
+      <h2>Minha Conta</h2>
+      <Image src={user.img as string} width={150} height={150} alt={user.name as string} style={{borderRadius:"50%", display:'block',margin:"auto"}}></Image>
+     <div>
+      <div className="field">
           Nome: 
         </div>
         <input
+          className="inputatt"
           type='text'
           name="name"
           id='name'
@@ -78,12 +83,13 @@ export default function UserPage() {
           required
         />
       </div>
-        <div className='field'>
-        <div className='nameatt'>
+        <div>
+        <div className="field">
           Email:
         </div>
        <div>
        <input
+       className="inputatt"
           value={user!.email}
           onChange={handleInputChange}
           readOnly={true}
@@ -91,11 +97,12 @@ export default function UserPage() {
         
        </div>
         </div>
-        <div className='field'>
-        <div className='nameatt'>
+        <div >
+        <div className="field">
           Nova Senha:
         </div>
         <input
+        className="inputatt"
           type='password'
           name="password"
           id='password'
@@ -103,11 +110,12 @@ export default function UserPage() {
           required
         />
         </div> 
-        <div className='field'>
-        <div className='nameatt'>
+        <div >
+        <div className="field">
           Antiga Senha:
         </div>
         <input
+        className="inputatt"
           type='password'
           name="lastPassword"
           id='lastPassword'
@@ -116,13 +124,12 @@ export default function UserPage() {
         />
         {error && (<div style={{ color: 'red', marginTop:"20px" ,textAlign:"start" }}>A senha está incorreta</div>)}
         </div> 
-        
-        
-       <div className='field'>
-       <div className='nameatt'>
+        <div>
+        <div className="field">
           Foto de Perfil: 
         </div>
         <input
+         style={{marginLeft:"20px"}}
           type='file'
           name="img"
           id='img'
@@ -132,11 +139,11 @@ export default function UserPage() {
         />
        </div>
       
-      <div className='buttonscad'>
+      <div className='buttonatt'>
         <a href='/'>
-          <button className='but can'>Cancelar</button>
+          <button>Cancelar</button>
         </a>
-        <button onClick={onSubmit} className="but cad">Cadastrar</button>
+        <button onClick={onSubmit}>Cadastrar</button>
       </div>
      </div>
    </PrivateRoute>

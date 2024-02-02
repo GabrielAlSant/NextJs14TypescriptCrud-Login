@@ -29,10 +29,10 @@ header h2 {
 }
 
 header ul {
-    margin-right: 350px;
+    margin-right: 300px;
     display: flex;
     list-style: none;
-    margin-left: 300px;
+    margin-left: 200px;
 
 }
 
@@ -124,9 +124,8 @@ a:hover {
     border-radius: 30px;
     border-right: 1px solid #e5e5e5;
     padding: 10px 15px;
-    margin-right: 20px;
+    margin-left: 30px;
     transition: .5s;
-    width: 200px;
 }
 
 

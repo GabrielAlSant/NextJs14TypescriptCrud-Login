@@ -1,0 +1,29 @@
+.all{
+    margin:auto;
+   text-align: start;
+   width: 600px;
+}
+
+.all h2{
+    margin-top:20px;
+    padding: 15px;
+}
+
+.all .inputatt{
+    margin-left:20px;
+    padding:5px;
+    width:400px
+}
+
+.all input[type=file]::file-selector-button {
+    background-color: #172c3f;
+    color: white;
+    border: 0px;
+    border-radius: 30px;
+    border-right: 1px solid #e5e5e5;
+    padding: 10px 15px;
+    margin-right: 20px;
+    transition: .5s;
+    width: 200px;
+
+}

@@ -26,7 +26,6 @@ export default function Home() {
 
 if (error) alert("Erro ao buscar dados");
 
-
   return (
    <PrivateRoute>
      <div>
