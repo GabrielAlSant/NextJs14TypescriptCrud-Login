@@ -284,3 +284,45 @@ th, td {
     border-radius: 20px;
 
 }
+
+.commentfield{
+ display:flex
+}
+.namecomment{
+margin-top:20px;
+margin-left:10px;
+
+}
+
+.datacomment{
+    margin-top:5px;
+    color:gray
+}
+
+.textcomment{
+    font-weight:10px !important;
+}
+
+.weightbolder{
+    font-weight:bolder;
+}
+
+.buttonComment{
+    margin-top:20px;
+     height:40px;
+     border:1px solid #172c3f;
+     color:white;
+     border-radius:10px;
+     margin-left:10px;
+     background-color:  #172c3f;
+}
+
+.buttonComment:hover{
+    margin-top:20px;
+     height:40px;
+     border:1px solid #172c3f;
+     color:#172c3f;
+     border-radius:10px;
+     margin-left:10px;
+     background-color:white
+}
