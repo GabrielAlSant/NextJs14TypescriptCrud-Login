@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Key, useState } from "react";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import Header from "@/components/header";
 import moment from 'moment'
 import 'moment/locale/pt'
@@ -43,7 +43,8 @@ export default function Post() {
     try {  
       const response = await axios.post("http://localhost:3000/comment", values); 
       console.log(response)
-
+      mutate("http://localhost:3000/post");
+      setValues({})
     } catch (error) {
       
     }
@@ -120,6 +121,7 @@ export default function Post() {
                 name="text"
                 data-author-id={user.id}
                 data-post-id={id}
+                value={values.text || ''}
                 onChange={handleInputChange}
                 ></input>
                  <button onClick={onSubmit} className="buttonComment">Comentar</button>
