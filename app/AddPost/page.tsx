@@ -4,6 +4,7 @@ import axios from 'axios';
 import Header from '@/components/header';
 import { getUserCookies } from '@/lib/cookies';
 import { useUser } from '@/AuthContext/useContext';
+import { toast } from 'sonner';
 
 
 const AddPost = () => {
@@ -26,9 +27,21 @@ const AddPost = () => {
     }
   };
 
+  if (!user) {
+    return (
+     <div>
+      <Header />
+       <div className='loader'>
+      <div className="c-loader"></div>
+      </div>
+      </div>
+      );
+   }
+
   const onSubmit = async () => {
     try {
-    
+      values.authorId = user.id as unknown as string
+      
       const formData = new FormData();
       formData.append('title', values.title || '');
       formData.append('content', values.content || '');
@@ -40,23 +53,11 @@ const AddPost = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
-
-      console.log(response.data);
+      toast.success("Publicado!")
     } catch (error) {
       console.error('Error creating user', error);
     }
   };
-
-  if (!user) {
-    return (
-     <div>
-      <Header />
-       <div className='loader'>
-      <div className="c-loader"></div>
-      </div>
-      </div>
-      );
-  }
   
 
   return (
@@ -89,19 +90,8 @@ const AddPost = () => {
           required
         />
         </div>
-        <div className='field'  style={{display:'none'}}>
-        <div className='nameatt'>
-          Autor:
-        </div>
-        <input
-          type='text'
-          name="authorId"
-          id='authorId'
-          value={user.id}
-          onChange={handleInputChange}
-          required
-        />
-        </div> 
+  
+        
        <div className='field'>
        <div className='nameatt'>
          Imagem: 

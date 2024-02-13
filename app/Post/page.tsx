@@ -9,6 +9,7 @@ import 'moment/locale/pt'
 import { useUser } from "@/AuthContext/useContext";
 import axios from "axios";
 
+
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function Post() {
@@ -45,6 +46,11 @@ export default function Post() {
       console.log(response)
       mutate("http://localhost:3000/post");
       setValues({})
+
+
+
+
+   
     } catch (error) {
       
     }
@@ -64,10 +70,13 @@ export default function Post() {
   return (
     <div>
       <Header />
-      <div className="allusers">
-        <h2>Post</h2>
+      <div className="max-w-5xl block m-auto bg-white my-10 rounded-md p-5">
+
+<h2 className="flex justify-center p-5 text-xl font-semibold text-violet-700">Publicações</h2>
+      
         <input
-          placeholder="Procurar"
+        className="my-10 w-3/4 block mx-auto bg-violet-100 p-2 rounded-md tracking-tight"
+          placeholder="Procurar Publicação"
           onChange={(e) => setFilter(e.target.value)}
         />
           <div>
@@ -77,83 +86,90 @@ export default function Post() {
               <>
           {updatedFilteredData.map(
             ({ id, title, content, author, img, postDate, commensts}: { id: number; title: string; content: string; author: any; img: string; postDate:string; commensts:any}) => (
-              <div className="postcard" key={id}>
+              <div className="max-w-3xl block mx-auto border-2 border-violet-950 my-10 rounded-md p-3" key={id}>
                 <div>
-                <div className="name">
+                <div className="flex min-w-0 gap-x-4">
                         <Image
-                        style={{marginTop:'12px'}}
-                          src={author.img}
+                          src={author.img as string}
                           width={50}
                           height={50}
-                          alt={author.name}
-                          className="imguser"
+                          alt={author.name as string}
+                          className="h-12 w-12 flex-none rounded-full bg-gray-50"
                         />
-                        <span className="nameusertable">{author.name}<br/><span className="data">{moment(postDate).locale('pt').fromNow()}</span></span>
-                        
-                  </div>
+                       <div className="min-w-0 flex-auto">
+                       <p className="text-sm font-semibold leading-6 text-gray-900">{author.name}</p>
+                       <p className="-mt-1 truncate text-xs leading-5 text-gray-500">{moment(postDate).locale('pt').fromNow()}</p>
+                      </div>
+                     </div>   
                   
-                  <h3 className="">{title}</h3>
+                  <h2 className="text-semibold text-md ml-2 my-2">{title}</h2>
                 </div>
-                <div className="email" style={{marginTop:'20px', marginBottom:'20px'}}>{content}</div>
+                <div className="text-md ml-2 my-2" >{content}</div>
                {img && 
               (<Image
+                 className="block mx-auto mb-2"
                  src={img as string}
                  width={680}
                  height={600}
                  alt={title as string}
                />)
                }
-            
-               <div className="Comments" style={{marginBottom:"-30px"}}>
-                <h4>Comentar</h4>
-               <div className="name">
-                        <Image
-                        style={{marginTop:'12px'}}
+                <div className="h-px bg-violet-950 w-full" />
+             <h2 className="text-bold text-md ml-2 my-2">Comentários</h2>
+            {user && (
+                 <div className="Comments" style={{marginBottom:"-30px"}}>
+                <div className="flex min-w-0 gap-x-4 my-5">
+                <Image
                           src={user.img as string}
                           width={50}
                           height={50}
                           alt={user.name as string}
-                          className="imguser"
+                          className="h-12 w-12 flex-none rounded-full bg-gray-50"
                         />
-                         <input
-                         style={{width:'400px', marginLeft:"20px"}}
-                id="text"
-                name="text"
-                data-author-id={user.id}
-                data-post-id={id}
-                value={values.text || ''}
-                onChange={handleInputChange}
-                ></input>
-                 <button onClick={onSubmit} className="buttonComment">Comentar</button>
-                        
-                  </div>
-               </div>
+                        <div className="min-w-0 flex-auto">
+                       <input
+                         className="p-1.5 mt-2 w-3/4 outline-none"
+                         id="text"
+                         name="text"
+                         placeholder="Digite seu comentário"
+                        data-author-id={user.id}
+                        data-post-id={id}
+                        onChange={handleInputChange}
+                 ></input>
+                <button onClick={onSubmit} className="bg-violet-600 text-semibold p-1 text-white hover:bg-violet-950 ml-5">Comentar</button>
+                  <div className="h-px bg-violet-700 w-9/12" />
+
+                      </div> 
+               
+   
+                   </div>
+                </div>
+              )}
+            
                 <br/>
                 <div className="Comments">
-                <h4>Comentarios</h4>
                 {commensts.length === 0 ? (
               <p>Sem Comentarios</p>
             ) : (
               <>
           {commensts.map(({id, text, author, postDate}:{id:number, text:string, author:any, postDate:any})=>(
-                   <div key={id}>
-                    <div className="commentfield">
+                   <div key={id} className="my-2">
+                  <div className="flex min-w-0 gap-x-4">
                         <Image
-                        style={{marginTop:'12px'}}
                           src={author.img}
                           width={50}
                           height={50}
-                          alt={author.name}
-                          className="imguser"
+                          alt={author.name as string}
+                          className="h-12 w-12 flex-none rounded-full bg-gray-50"
                         />
-                        <span className="namecomment"><span className="weightbolder">{author.name}</span><span className="datacomment" style={{marginLeft:"10px"}}>{moment(postDate).locale('pt').fromNow()}</span>
-                        <br/>
-                        <span className="textcomment">{text}</span></span>
+                       <div className="min-w-0 flex-auto">
+                       <p className="text-sm font-semibold leading-6 text-gray-900">{author.name}{' '}<span className="-mt-1 truncate text-xs leading-5 text-gray-500">{moment(postDate).locale('pt').fromNow()}</span></p>
+                       <p className="-mt-1 truncate text-md leading-5">{text}</p>
+                      </div>
+                     </div>  
+  
                              
-                  </div>
-                    </div>
-
-
+                 </div>
                 ))}
                 </>
                 )}

@@ -4,6 +4,7 @@ import axios from 'axios';
 import Header from '@/components/header';
 import { getUserCookies } from '@/lib/cookies';
 import { useUser } from '@/AuthContext/useContext';
+import { toast } from 'sonner';
 
 
 const AddUser = () => {
@@ -41,6 +42,7 @@ const AddUser = () => {
       });
 
       if(response.data == 422){
+        toast.success("O email já está sendo utilizado")
         setError(true)
       };
     } catch (error) {
@@ -52,11 +54,11 @@ const AddUser = () => {
   return (
     <div>
      <Header />
-     <div className='AddUser'>
+     <div className=''>
      <div>
-      <h2 className='addusertitle'>Criar Conta</h2>
-      <div className='field'>
-      <div className='nameatt'>
+      <h2 className=''>Criar Conta</h2>
+      <div className=''>
+      <div className=''>
           Nome: 
         </div>
         <input
@@ -67,8 +69,8 @@ const AddUser = () => {
           required
         />
       </div>
-        <div className='field'>
-        <div className='nameatt'>
+        <div className=''>
+        <div className=''>
           Email:
         </div>
        <div style={{marginTop:5}}>
@@ -79,23 +81,23 @@ const AddUser = () => {
           onChange={handleInputChange}
           required
         />
-        {error && (<div style={{ color: 'red', marginTop:"20px" ,textAlign:"start" }}>Este email já está sendo utilizado</div>)}
+        {error && (<div >Este email já está sendo utilizado</div>)}
        </div>
         </div>
-        <div className='field'>
-        <div className='nameatt'>
+        <div className=''>
+        <div className=''>
           Senha:
         </div>
         <input
-          type='password'
-          name="password"
-          id='password'
+          type=''
+          name=""
+          id=''
           onChange={handleInputChange}
           required
         />
         </div> 
-       <div className='field'>
-       <div className='nameatt'>
+       <div className=''>
+       <div className=''>
           Foto de Perfil: 
         </div>
         <input
@@ -108,11 +110,11 @@ const AddUser = () => {
         />
        </div>
       
-      <div className='buttonscad'>
+      <div className=''>
         <a href='/'>
-          <button className='but can'>Cancelar</button>
+          <button className=''>Cancelar</button>
         </a>
-        <button onClick={onSubmit} className="but cad">Cadastrar</button>
+        <button onClick={onSubmit} className="">Cadastrar</button>
       </div>
      </div>
      </div> 
