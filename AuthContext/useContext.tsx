@@ -1,7 +1,7 @@
 "use client"
 import { deleteUserCookies, getUserCookies } from '@/lib/cookies';
 import { createContext, useContext, ReactNode, useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import {  useRouter } from 'next/navigation';
 
 interface User {
   id?:number;
@@ -31,6 +31,8 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       const userdatacookie = await getUserCookies();
       if (userdatacookie) {
         login(userdatacookie);
+      }else{
+        route.push("/Login")
       }
       setLoading(false);  
     };

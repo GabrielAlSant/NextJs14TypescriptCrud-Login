@@ -1,5 +1,6 @@
 'use server'
 import axios from 'axios';
+import { redirect } from 'next/navigation';
 import { cookies, headers } from 'next/headers';
 
 export async function setUserCookies(name:string, token:any){
@@ -23,7 +24,7 @@ export async function getUserCookies(){
     if (response.data == 401) {
     deleteUserCookies()
     console.error("Token Invalido ou expirado.")
-    return null
+    return  redirect('/Login')
     }
 
     return response.data
