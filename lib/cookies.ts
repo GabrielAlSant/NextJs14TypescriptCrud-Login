@@ -15,7 +15,7 @@ export async function getUserCookies(){
     if (!token) {
         return null;
       } 
-      const response = await axios.post("http://localhost:3000/getuser", {token:token.value}, {
+      const response = await axios.post(process.env.NEXT_PUBLIC_DB_URL+"/getuser", {token:token.value}, {
         headers: {
           'authorization': `Bearer ${token.value}`
         }

@@ -26,10 +26,9 @@ export default function Header(){
            <Link href='/'><h2 className="flex font-semibold tracking-tight text-4xl mt-2 -ml-16"><Image className="-mt-1" src={logo} width={50} height={50} alt="Logo" /><span className="ml-1">Baiacu</span></h2></Link>
             <ul className="flex top-3 mx-32">
                 
-                <Link href='/Users'><li className="p-5">Usuarios</li></Link>
-                <Link href='AddUser'><li className="p-5">Cadastrar</li></Link>  
-                <Link href='Post'><li className="p-5">Posts</li></Link>         
-                <Link href='AddPost'><li className="p-5">Add Posts</li></Link>         
+                <Link href='/Users'><li className="p-5">Usuarios</li></Link> 
+                <Link href='/Post'><li className="p-5">Publicações</li></Link>         
+     
             </ul>
             {user ? (
          <div className="flex min-w-0 gap-x-4 mt-2">

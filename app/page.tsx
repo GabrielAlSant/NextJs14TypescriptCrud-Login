@@ -5,15 +5,15 @@ import Header from "@/components/header";
 import { getUserCookies, setUserCookies } from "@/lib/cookies";
 import { useEffect } from "react";
 import { useUser } from "@/AuthContext/useContext";
-
+import PrivateRoute from "@/components/privateRoute";
 
 
 export default function Home() {
  
   return (
-    <main >
+    <PrivateRoute >
      <Header/>
     
-    </main>
+    </PrivateRoute>
   );
 }

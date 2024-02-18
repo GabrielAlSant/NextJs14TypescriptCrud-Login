@@ -28,7 +28,7 @@ const Login = () => {
   const onSubmit = async () => {
     try {
       setError(false);
-      const response = await axios.post("http://localhost:3000/user/login", values); 
+      const response = await axios.post(process.env.NEXT_PUBLIC_DB_URL+"/user/login", values); 
         if (response.data.status === 401) {
           setError(true);
           setErrormsg("Senha incorreta");

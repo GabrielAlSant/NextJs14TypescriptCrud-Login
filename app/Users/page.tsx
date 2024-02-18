@@ -8,6 +8,7 @@ import { useUser } from "@/AuthContext/useContext";
 import { useRouter } from 'next/navigation';
 import PrivateRoute from "@/components/privateRoute";
 import axios from "axios";
+import { toast } from "sonner";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -16,7 +17,7 @@ export default function Home() {
   const { user } = useUser()
   const route = useRouter()
 
-  const { data, error } = useSWR("http://localhost:3000/user", fetcher);
+  const { data, error } = useSWR(process.env.NEXT_PUBLIC_DB_URL+"/user", fetcher);
 
   const updatedFilteredData = data
     ? data.filter((user: { name: string, email: string }) =>
@@ -27,17 +28,17 @@ export default function Home() {
 
     const onSubmit = async (event: any) => {
       try {
-        await axios.post("http://localhost:3000/invite", {
+        await axios.post(process.env.NEXT_PUBLIC_DB_URL+"/invite", {
           userSend: event.target.dataset.userId,
           userInvited: event.target.dataset.userinvId
         });
-        mutate("http://localhost:3000/user");
+        mutate(process.env.NEXT_PUBLIC_DB_URL+"/user");
       } catch (error) {
         console.error(error);
       }
     };
 
-if (error) alert("Erro ao buscar dados");
+if (error) toast.warning("Erro ao buscar dados");
 
 if (!user) {
   return (

@@ -8,6 +8,7 @@ import moment from 'moment'
 import 'moment/locale/pt'
 import { useUser } from "@/AuthContext/useContext";
 import axios from "axios";
+import AddPost from "@/components/newPost";
 
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
@@ -16,8 +17,9 @@ export default function Post() {
   const [values, setValues] = useState<{ text?: string; authorId?: string; postId?: string;}>({});
   const [filter, setFilter] = useState("");
   const {user} = useUser()
+ 
 
-  const { data, error } = useSWR("http://localhost:3000/post", fetcher);
+  const { data, error } = useSWR(process.env.NEXT_PUBLIC_DB_URL+"/post", fetcher);
 
   const updatedFilteredData = data
     ? data.filter((user: { title: string, content:string }) =>
@@ -42,15 +44,11 @@ export default function Post() {
 
   const onSubmit = async ()=>{
     try {  
-      const response = await axios.post("http://localhost:3000/comment", values); 
+      const response = await axios.post(process.env.NEXT_PUBLIC_DB_URL+"/comment", values); 
       console.log(response)
-      mutate("http://localhost:3000/post");
+      mutate(process.env.NEXT_PUBLIC_DB_URL+"/post");
       setValues({})
 
-
-
-
-   
     } catch (error) {
       
     }
@@ -73,7 +71,7 @@ export default function Post() {
       <div className="max-w-5xl block m-auto bg-white my-10 rounded-md p-5">
 
 <h2 className="flex justify-center p-5 text-xl font-semibold text-violet-700">Publicações</h2>
-      
+      <AddPost />
         <input
         className="my-10 w-3/4 block mx-auto bg-violet-100 p-2 rounded-md tracking-tight"
           placeholder="Procurar Publicação"
@@ -109,8 +107,8 @@ export default function Post() {
               (<Image
                  className="block mx-auto mb-2"
                  src={img as string}
-                 width={680}
-                 height={600}
+                 width={480}
+                 height={400}
                  alt={title as string}
                />)
                }
