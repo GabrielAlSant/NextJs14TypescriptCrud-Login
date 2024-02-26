@@ -1,5 +1,7 @@
 "use client"
 
+import React from 'react';
+import * as AlertDialog from '@radix-ui/react-alert-dialog';
 import Image from "next/image";
 import Header from "@/components/header";
 import { useUser } from "@/AuthContext/useContext";
@@ -87,6 +89,7 @@ export default function UserPage() {
   return (
    <PrivateRoute>
    <Header/>
+ 
    <div className='max-w-5xl block m-auto bg-white my-10 rounded-md overflow-hidden p-5'>
       <h2 className="flex justify-center p-5 text-xl font-semibold">Olá {user.name}</h2>
 
@@ -104,9 +107,29 @@ export default function UserPage() {
             <X className="size-5" />
           </Dialog.Close>
 <div className="text-xl p-5">Configurações</div>
-<div className="text-md my-2.5 p-5 bg-violet-800 hover:text-violet-300 bg-violet-900"><a href="UpdateUser"><button>Alterar Informações da conta</button></a></div>
-<div className="text-md p-5 bg-violet-800 hover:text-violet-300 bg-violet-900"><button onClick={handleDelete}><span className="text-semibold">Excluir</span> Conta</button></div>
-
+<div className="text-md my-2.5 p-5 bg-violet-800 hover:text-violet-300 hover:bg-violet-900 text-center"><a href="UpdateUser"><button>Alterar Informações da conta</button></a></div>
+<AlertDialog.Root>
+    <AlertDialog.Trigger>
+    <div className="text-md p-5 bg-violet-800 hover:text-violet-300 hover:bg-violet-900"> <button className="bg-violet-450">Excluir minha conta</button></div>
+    </AlertDialog.Trigger>
+    <AlertDialog.Portal>
+      <AlertDialog.Overlay className="inset-0 fixed bg-black/50" />
+      <AlertDialog.Content className="fixed overflow-hidden text-violet-950 inset-0 md:inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-[440px] w-full md:h-[30vh] bg-white md:rounded-md flex flex-col outline-none">
+        <AlertDialog.Title className="text-xl p-5">Você Tem certeza?</AlertDialog.Title>
+        <AlertDialog.Description className="px-4">
+          Está ações não pode ser revertida, sua conta será excluida permanentemente.
+        </AlertDialog.Description>
+        <div>
+          <AlertDialog.Cancel className="mx-4 my-4" asChild>
+            <button className="bg-violet-700 p-2 text-white hover:bg-violet-950">Cancelar</button>
+          </AlertDialog.Cancel>
+          <AlertDialog.Action asChild>
+            <button className="bg-rose-700 p-2 text-white hover:bg-rose-950" onClick={handleDelete}>Sim, exclua minha conta</button>
+          </AlertDialog.Action>
+        </div>
+      </AlertDialog.Content>
+    </AlertDialog.Portal>
+  </AlertDialog.Root>
           </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>

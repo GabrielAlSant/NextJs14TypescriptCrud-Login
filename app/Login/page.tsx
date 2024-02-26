@@ -40,7 +40,7 @@ const Login = () => {
           login(response.data.data);
           setUserCookies('user', response.data.token)
           console.log("Sucesso");
-          router.push('/Users');
+          router.push('/Post');
         }
     } catch (err) {
       console.error('Erro ao validar login', err);

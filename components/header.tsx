@@ -25,9 +25,10 @@ export default function Header(){
         <header className="flex justify-center bg-violet-950 text-violet-50 h-16 top-3">
            <Link href='/'><h2 className="flex font-semibold tracking-tight text-4xl mt-2 -ml-16"><Image className="-mt-1" src={logo} width={50} height={50} alt="Logo" /><span className="ml-1">Baiacu</span></h2></Link>
             <ul className="flex top-3 mx-32">
-                
+            <Link href='/Friends'><li className="p-5">Amigos</li></Link> 
                 <Link href='/Users'><li className="p-5">Usuarios</li></Link> 
-                <Link href='/Post'><li className="p-5">Publicações</li></Link>         
+                <Link href='/Post'><li className="p-5">Publicações</li></Link>   
+                <Link href='/Chat'><li className="p-5">Chat</li></Link>      
      
             </ul>
             {user ? (

@@ -46,7 +46,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const logout = () => {
     deleteUserCookies();
     setUser(null);
-    route.push("/")
+    route.push("/Login")
   };
 
   return (
