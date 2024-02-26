@@ -43,7 +43,7 @@ export default function Home() {
         invitedUserId: event.target.dataset.inviteduserId
       });
       mutate(`${process.env.NEXT_PUBLIC_DB_URL}/getinvite/${user.id}`);
-      toast.success("Convite Enviado")
+      toast.success("Convite Aceito")
     } catch (error) {
       console.error(error);
     }

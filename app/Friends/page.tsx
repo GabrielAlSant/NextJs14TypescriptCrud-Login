@@ -52,12 +52,12 @@ export default function Friends() {
             <p>Nenhum Amigo encontrado.</p>
           ) : (
             <>
-              {updatedFilteredData.map(({ id, userEnv, invitedUser }: { id: number; userEnv: any; invitedUser: any }) => (
+              {updatedFilteredData.map(({ id, chat, userEnv, invitedUser }: { id: number; chat: any; userEnv: any; invitedUser: any }) => (
                 <div key={id}>
                   {user.id !== userEnv.id ? (
-                    <FriendList user={userEnv} />
+                    <FriendList friend={userEnv} chatId={chat[0].id}  />
                   ) : (
-                    <FriendList user={invitedUser} />
+                    <FriendList friend={invitedUser} chatId={chat[0].id} />
                   )}
                 </div>
               ))}
