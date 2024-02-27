@@ -23,7 +23,7 @@ interface Friend {
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function FriendList({ friend, chatId }: Friend) {
-  const [values, setValues] = useState<{ chatId?: string; content?: string; img?: File; senderId?: string; to?:string;}>({});
+  const [values, setValues] = useState<{ chatId?: string; content?: string; img?: File; senderId?: string; to?:string;name?: string}>({});
   const [msgs, setMsgs] = useState<any>(null)
   const [scroll, setScroll] = useState<any>(false)
   const { user } = useUser();
@@ -68,11 +68,13 @@ export default function FriendList({ friend, chatId }: Friend) {
       const formData = new FormData();
       values.senderId = user?.id as unknown as string;
       values.chatId = chatId;
+      values.name = user?.name
 
       formData.append('chatId', values.chatId || '');
       formData.append('content', values.content || '');
       formData.append('senderId', values.senderId || '');
       formData.append('to', values.to || '');
+      formData.append('name', values.name || '');
       formData.append('img', values.img || '');
 
       let response;
@@ -100,9 +102,11 @@ export default function FriendList({ friend, chatId }: Friend) {
 
   useEffect(() => {
     if (socket.current) {
-      socket.current.on("msg-recieve", (msg) => {
-        if(msg){
+      socket.current.on("msg-recieve", (name) => {
+        if(name){
+          console.log(name)
           mutate(`${process.env.NEXT_PUBLIC_DB_URL}/chat/${user?.id}`)
+          toast.info(`${name.name} enviou uma mensagem`)
         }
       })
     }
@@ -111,7 +115,7 @@ export default function FriendList({ friend, chatId }: Friend) {
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [data]);
+  }, [msgs]);
 
   
   return (
@@ -138,7 +142,7 @@ export default function FriendList({ friend, chatId }: Friend) {
         </Dialog.Trigger>
         <Dialog.Portal>
           <Dialog.Overlay className="" />
-          <Dialog.Content className="fixed right-2 bottom-0 border-2 border-violet-950 p-2 bg-white w-[350px] h-[320px]">
+          <Dialog.Content className="fixed right-2 bottom-0 border-2 border-violet-950 p-2 bg-white w-[350px] h-[320px]" >
             <Dialog.Close className="absolute right-0 top-0 bg-violet-800 p-1.5 text-slate-400 hover:text-slate-100">
               <X className="size-5" />
             </Dialog.Close>
