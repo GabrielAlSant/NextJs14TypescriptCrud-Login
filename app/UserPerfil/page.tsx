@@ -231,7 +231,7 @@ export default function UserPage() {
           )}
           {data && data.length === 0 && <div>Não Possui publicações</div>}
      </div>
-    <button onClick={handleDelete}>Excluir Conta</button>
+   
    </PrivateRoute>
   );
 }
